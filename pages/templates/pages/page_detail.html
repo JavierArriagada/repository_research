@@ -11,7 +11,7 @@
         <div>
           {{page.content|safe}}
           {% if request.user.is_staff %}
-            <p><a href="#">Editar</a></p>
+            <p><a href="{% url 'pages:update' page.id %}">Editar</a></p>
           {% endif %}
         </div>
       </div>
