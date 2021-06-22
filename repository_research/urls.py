@@ -23,4 +23,7 @@ urlpatterns = [
     path('pages/', include(pages_patterns)),
     
     path('admin/', admin.site.urls),
+
+    #Path de Auth
+    path('accounts/', include('django.contrib.auth.urls')), #django nos proveera de diferentes urls para hacer la autentificacion
 ]
