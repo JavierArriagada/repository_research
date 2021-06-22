@@ -140,3 +140,7 @@ if DEBUG:
 else:
     # aqui hay que configurar un mail real para produccion
     pass
+
+#MEdia Files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
