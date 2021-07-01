@@ -37,10 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'profiles',
+    'django.contrib.staticfiles',    
     'ckeditor',
     'core',
+    'messenger',
+    'profiles',
     'pages.apps.PagesConfig', #configuracion extendida
 ]
 

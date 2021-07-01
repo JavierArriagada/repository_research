@@ -19,4 +19,4 @@ class Profile(models.Model):
 def ensure_profile_exists(sender, instance, **kwargs):
     if kwargs.get('created', False):            
         Profile.objects.get_or_create(user=instance)
-        print("Se acaba de crear un usuario y su perfil enlazado")
+        #print("Se acaba de crear un usuario y su perfil enlazado")
