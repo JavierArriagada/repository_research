@@ -64,7 +64,7 @@
             <script>
               var send = document.getElementById("send");
               send.addEventListener("click", function(){
-                const content = encodeURIComponent(document.getElementById("content").value);
+                var content = encodeURIComponent(document.getElementById("content").value);
                 if (content.length > 0){
                   document.getElementById("content").value = ''; //borrar contenido             
                   const url = "{% url 'messenger:add' thread.pk %}" + "?content="+content;
@@ -75,13 +75,17 @@
                         //alert(data.created)
 
                         if (data.created) {
-                          // Aquí iría el código de creación del mensaje dinámicamente
+                          // Si es el primer mensaje del hilo actualizaremos para que aparezca a la izquierda
+                          if (data.first){
+                            window.location.href = "{% url 'messenger:detail' thread.pk %}";
+                          }
+                          // Si no hay redirección creamos una nueva capa dinámicamente con el mensaje
                           var message = document.createElement('div');
-                          message.classList.add("mine", "mb-3");
+                          message.classList.add('mine', 'mb-3');
                           message.innerHTML = '<small><i>Hace unos segundos</i></small><br>' + decodeURIComponent(content);
                           document.getElementById("thread").appendChild(message);
                           ScrollBottomInThread();
-                            
+                          
                         } else {
                           // Si algo ha ido mal podemos debugear en la consola del inspector
                           console.log("Algo ha fallado y el mensaje no se ha podido añadir.")
