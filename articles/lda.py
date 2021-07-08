@@ -4,7 +4,7 @@ import pandas as pd
 import pickle
 # define the name of the directory to be created
 path = "../modelo_final"   
-ruta_modelo = path + "/lda_model"
+ruta_modelo = path + "/LDA-Model"
 # definicion directorios de resultados de entrenamiento
 lda_final = load_model(ruta_modelo)
 num_topics = len(lda_final.get_topics());
@@ -37,13 +37,3 @@ topic_word_matrix_dir = path + "/topic_word_matrix.sav"
 
 document_topic_matrix = pickle.load(open(document_topic_matrix_dir, 'rb'))
 topic_word_matrix = pickle.load(open(topic_word_matrix_dir, 'rb'))
-
-def document_topic_matrix():
-    return document_topic_matrix
-
-def topic_word_matrix():
-    return topic_word_matrix
-
-def top_doc_per_topic(topic , top):
-
-    return lda_train_results.sort_values(topic, ascending=False)[topic].head(top)
