@@ -64,7 +64,7 @@ topic_word_matrix = pickle.load(open(topic_word_matrix_dir, 'rb'))
 
 print('asd')
 
-k = 5
+k = 10
 
 X = np.array(document_topic_matrix)  # pandas to np.array
 
