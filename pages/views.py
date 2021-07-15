@@ -28,9 +28,16 @@ class PageDetailView(DetailView):
     model = Page
 
 @method_decorator(staff_member_required, name='dispatch')
-class PageCreate( CreateView):
+class PageCreate(CreateView):
     model = Page
     form_class = PageForm
+
+    def valid(self):
+        if form_class.is_valid():          
+            form_class.save()
+
+    
+
     success_url = reverse_lazy('pages:pages')
 
     
@@ -40,6 +47,10 @@ class PageUpdate(UpdateView):
     model = Page
 
     form_class = PageForm
+
+    def valid(self):
+        if form_class.is_valid():          
+            form_class.save()
 
     template_name_suffix = '_update_form'
 

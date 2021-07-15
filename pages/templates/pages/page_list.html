@@ -11,6 +11,7 @@
           <h2 class="mb-4">{{page.title}}</h2>
           <div>
             <p>{{page.content|striptags|safe|truncatechars:"200"}}</p>
+            
             <p><a href="{% url 'pages:page' page.id page.title|slugify %}">Leer más</a>
               
               {% if request.user.is_staff %}
