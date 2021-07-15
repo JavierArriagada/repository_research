@@ -8,6 +8,7 @@ from django.shortcuts import redirect
 from .models import Page
 from .forms import PageForm
 
+
 class StaffRequiredMixin(object):
     """
     Este mixin requerira que el usuario sea miembro del staff
@@ -49,3 +50,4 @@ class PageUpdate(UpdateView):
 class PageDelete(DeleteView):
     model = Page
     success_url = reverse_lazy('pages:pages')
+

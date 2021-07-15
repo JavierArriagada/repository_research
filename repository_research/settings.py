@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'core',
     'messenger',
-    'profiles',
+    'profiles.apps.ProfilesConfig',
     'pages.apps.PagesConfig', #configuracion extendida
 ]
 
