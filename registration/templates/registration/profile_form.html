@@ -20,7 +20,7 @@
                         </div>
                         <!-- Formulario -->
                         <div class="col-md-10">
-                            <h3>Perfil</h3>
+                            <h3>{{request.user.username}}</h3>
                             <input type="file" name="avatar" class="form-control-file mt-3" id="id_avatar">
                             {{ form.bio }}
                             {{ form.link }}

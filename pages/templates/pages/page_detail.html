@@ -13,6 +13,21 @@
           {% if request.user.is_staff %}
             <p><a href="{% url 'pages:update' page.id %}">Editar</a></p>
           {% endif %}
+
+          <td>
+            <a href="{{ page.pdf.url }}" class="btn btn-primary btn-sm" target="_blank">
+              Download PDF
+            </a>
+          </td>
+
+          <td>
+            {% if page.cover %}
+              <img src="{{ page.cover.url }}" alt="{{ page.title }}" style="width:100px;">
+            {% else %}
+              <span class="text-muted">No cover</span>
+            {% endif %}
+          </td>
+          
         </div>
         
       </div>

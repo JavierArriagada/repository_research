@@ -4,6 +4,54 @@
 {% block content %}
 {% include 'pages/includes/pages_menu.html' %}
 <main role="main">
+  <table class="table mb-0">
+    <thead>
+      <tr>
+        <th>Cover</th>
+        <th>Title</th>
+        <th>Download</th>
+        {% if request.user.is_staff %}
+          <th>Edit</th>
+        {% endif %}
+        
+      </tr>
+    </thead>
+    <tbody>
+      {% for page in page_list %}
+        <tr>
+          <td>
+            {% if page.cover %}
+              <img src="{{ page.cover.url }}" alt="{{ page.title }}" style="width:100px;">
+            {% else %}
+              <span class="text-muted">No cover</span>
+            {% endif %}
+          </td>
+          <td>
+            <p><a href="{% url 'pages:page' page.id page.title|slugify %}">{{ page.title }}</a>
+          </td>
+          <td>
+            <a href="{{ page.pdf.url }}" class="btn btn-primary btn-sm" target="_blank">
+              Download PDF
+            </a>
+          </td>
+          
+
+            {% if request.user.is_staff %}
+            <td>
+              <a href="{% url 'pages:update' page.id %}">Editar</a>
+              <a href="{% url 'pages:delete' page.id %}">Borrar</a>
+            </td> 
+            {% endif %}
+
+            
+          
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+
   <div class="container mb-4">
     {% for page in page_list|dictsort:"id" reversed %}
       <div class="row mt-3">
@@ -16,14 +64,23 @@
               
               {% if request.user.is_staff %}
                 | <a href="{% url 'pages:update' page.id %}">Editar</a>
-                | <a href="{% url 'pages:delete' page.id %}">Borrar</a> 
+                | <a href="{% url 'pages:delete' page.id %}">Borrar</a>
               {% endif %}
              
             </p>
+
+            <p>{{page.id}}</p>
+            <p>{{page.pdf}}</p>
+
+
+            <p>{{request.user.id}}</p>
+
           </div>
         </div>
       </div>
     {% endfor %}
   </div>
+
+  
 </main>
 {% endblock %}
