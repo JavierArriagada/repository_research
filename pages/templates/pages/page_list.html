@@ -71,9 +71,18 @@
 
             <p>{{page.id}}</p>
             <p>{{page.pdf}}</p>
+            <p>{{page.created_by}}</p>
 
+            <p class="profile-data">
+              <b>{{profile.user|truncatechars:"16"}}</b><br>
+              <a href="{% url 'profiles:detail' page.created_by %}">Ver perfil</a>
+            </p>
 
-            <p>{{request.user.id}}</p>
+            {% if request.user != page.created_by %}
+                <a href="{% url 'messenger:start' page.created_by.username %}" class="btn btn-primary btn-sm btn-block mt-3">
+                  Enviar Mensaje
+                </a>
+            {% endif %}
 
           </div>
         </div>
