@@ -1,4 +1,5 @@
 import os
+
 # define the name of the directory to be created
 path = "../Modelo Final"
    
@@ -9,9 +10,9 @@ from pycaret.nlp import *
 lda_final = load_model(ruta_modelo)
 num_topics = len(lda_final.get_topics());
 
-import pandas as pd
 import pickle
 
+import pandas as pd
 
 train_data_dir = path + "/train_data_.sav"
 train_tokenized_words_dir = path + "/train_tokenized_words.sav"
@@ -51,8 +52,9 @@ document_topic_matrix = pickle.load(open(document_topic_matrix_dir, 'rb'))
 topic_word_matrix = pickle.load(open(topic_word_matrix_dir, 'rb'))
 
 
-import extended_similarities as sims
 import numpy as np
+
+import extended_similarities as sims
 
 k = 5
 
