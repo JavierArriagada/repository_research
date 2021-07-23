@@ -27,6 +27,11 @@ class PageDetailView(DetailView):
 
     model = Page
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(PageDetailView, self).get_context_data(*args, **kwargs)
+        context['page_list'] = Page.objects.all()
+        return context
+
 @method_decorator(staff_member_required, name='dispatch')
 class PageCreate(CreateView):
     model = Page

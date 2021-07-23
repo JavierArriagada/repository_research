@@ -3,9 +3,72 @@
 {% block title %}Inicio{% endblock %}
 {% block content %}
 <div class="container">
-  <div style="padding-top:50px; text-align:center;">
-    <h1>{{title}}</h1>
-    <p class="lead">CBV, autenticación, registros, perfiles y más</p>
+  <div class="row" >
+    <div class="col-md-12 itemFullText" style="padding-top:50px; text-align:center;">
+      <div id="searchFormWithLogo">
+        <div style="text-align: center; margin-top: 50px">
+          <div style="font-size:52px; padding: 0 15px 0 15px; line-height: 1;">
+            <a href="/"  style="text-decoration: none;" id="logoText">
+              <img src="{% static 'registration/img/no-avatar.jpg' %}" style="width: 70px;" title="Udec-Repo">
+            </a>
+          </div>
+          <div class="color4" style="color: #90A5A8; font-weight: 400; padding: 4px 0 15px 0; font-style: italic;">
+            Part of Udec-Repo project.  The UdeC's largest ebook library
+          </div>
+
+                      
+          
+        </div>
+        <h1>{{title}}</h1>
+        <form method="GET" id="searchForm" >
+          <div class="b-search-form" >
+            <div class="b-search-input">
+              <div class="input">
+                <input type="text" maxlength="200" name="q" id="searchFieldx" value placeholder="Buscar por titulo, palabras, temas, cadenas de texto, etc..." style="padding-right: 12px;" >
+
+              </div>
+              <div class="button whitheShadow">
+                <div class="inner">
+                  <button type="submit">
+
+                    <span class="hidden-xs">Buscar</span>
+
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </form>
+
+                                          
+      </div>
+
+      <h2 class="color1" style="text-align: left; margin-top:20px;">Mas Populares</h2>
+      <div style="background: #49AFD0;      height: 2px;      width: 100%;  text-align: left;    margin-bottom: 20px;">
+        asd
+      </div>
+
+      {% for page in page_list %}
+
+      <div id="bMosaicBox" style="display: block; position: relative; height: 1155px;" data-min-width="1120" data-total-col="5" data-total-row="1163" data-wall-width="940" data-wall-height="1155" >
+        <div class="brick checkBookDownloaded" data-book_id="{{page.id}}" style="width: 181.6px; position: absolute; opacity: 1; top: 0px; left: 0px; height: 279px;" data-delay="1" data-height="289" data-width="188" data-state="move" id="1-2"> 
+          <a style="text-decoration: none;" href="{% url 'pages:page' page.id page.title|slugify %}"  title={{page.title}}>
+            <div class="e-book-cover covered">
+              <img src="{{ page.cover.url }}" class="bMosaicCover bgrid-item item" width="100%">
+            </div>
+          </a>
+        </div>
+      </div>
+
+      {% endfor %}
+
+
+    </div>
   </div>
 </div>
 {% endblock %}
+
+

@@ -4,51 +4,7 @@
 {% block content %}
 {% include 'pages/includes/pages_menu.html' %}
 <main role="main">
-  <table class="table mb-0">
-    <thead>
-      <tr>
-        <th>Cover</th>
-        <th>Title</th>
-        <th>Download</th>
-        {% if request.user.is_staff %}
-          <th>Edit</th>
-        {% endif %}
-        
-      </tr>
-    </thead>
-    <tbody>
-      {% for page in page_list %}
-        <tr>
-          <td>
-            {% if page.cover %}
-              <img src="{{ page.cover.url }}" alt="{{ page.title }}" style="width:100px;">
-            {% else %}
-              <span class="text-muted">No cover</span>
-            {% endif %}
-          </td>
-          <td>
-            <p><a href="{% url 'pages:page' page.id page.title|slugify %}">{{ page.title }}</a>
-          </td>
-          <td>
-            <a href="{{ page.pdf.url }}" class="btn btn-primary btn-sm" target="_blank">
-              Download PDF
-            </a>
-          </td>
-          
-
-            {% if request.user.is_staff %}
-            <td>
-              <a href="{% url 'pages:update' page.id %}">Editar</a>
-              <a href="{% url 'pages:delete' page.id %}">Borrar</a>
-            </td> 
-            {% endif %}
-
-            
-          
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+ 
 
 
 
@@ -70,12 +26,10 @@
             </p>
 
             <p>{{page.id}}</p>
-            <p>{{page.pdf}}</p>
-            <p>{{page.created_by}}</p>
+            
 
             <p class="profile-data">
-              <b>{{profile.user|truncatechars:"16"}}</b><br>
-              <a href="{% url 'profiles:detail' page.created_by %}">Ver perfil</a>
+              <a href="{% url 'profiles:detail' page.created_by %}">{{page.created_by}}</a>
             </p>
 
             {% if request.user != page.created_by %}
@@ -88,6 +42,7 @@
         </div>
       </div>
     {% endfor %}
+    <p>{{page_list}}</p>
   </div>
 
   
