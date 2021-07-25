@@ -33,7 +33,7 @@
             </p>
 
             {% if request.user != page.created_by %}
-                <a href="{% url 'messenger:start' page.created_by.username %}" class="btn btn-primary btn-sm btn-block mt-3">
+                <a href="{% url 'messenger:start' page.created_by %}" class="btn btn-primary btn-sm btn-block mt-3">
                   Enviar Mensaje
                 </a>
             {% endif %}
@@ -42,7 +42,6 @@
         </div>
       </div>
     {% endfor %}
-    <p>{{page_list}}</p>
   </div>
 
   

@@ -37,6 +37,7 @@
           </a>
       {% endif %}
 
+      <img src="{{page.created_by.profile.avatar.url}}" class="avatar">      <!-- ordenar bien los templaates -->
 
     </div>
 
@@ -47,6 +48,8 @@
         <a href="{% url 'profiles:detail' page.created_by %}">Ver perfil</a>
 
         <img src="{{ page.created_by.profile.avatar.url }}" class="img-fluid">
+
+        <img src="{% static 'registration/img/no-avatar.jpg' %}" class="img-fluid">
       </p>
       
 
@@ -92,6 +95,7 @@
         </div>
       </div>
     {% endfor %}
+    <p>{{page_list}}</p>
   </div>
   
 </main>

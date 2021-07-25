@@ -26,20 +26,20 @@ class PageListView(ListView):
 class PageDetailView(DetailView):
 
     model = Page
-    
+
     def get_context_data(self, *args, **kwargs):
 
-        context = super(PageDetailView, self).get_context_data(*args, **kwargs)
+        context = super(PageDetailView, self).get_context_data(*args, **kwargs)        
         
         julio_godoy = User.objects.get(username='julio_godoy')
         roberto_asin = User.objects.get(username='roberto_asin')
 
-       
         context['julio_godoy_list'] = Page.objects.filter(created_by=julio_godoy)[:5]
         context['roberto_asin_list'] = Page.objects.filter(created_by=roberto_asin)[:5]
 
         return context
-        
+
+
 @method_decorator(staff_member_required, name='dispatch')
 class PageCreate(CreateView):
     model = Page
