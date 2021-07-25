@@ -3,6 +3,8 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from registration.models import Profile
 
+from articles.models import Article, User
+
 
 # Create your views here.
 class ProfileListView(ListView):

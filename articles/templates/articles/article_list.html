@@ -1,37 +1,12 @@
 {% extends 'core/base.html' %}
 {% load static %}
-{% block title %}{{profile.user}}{% endblock %}
+{% block title %}Páginas{% endblock %}
 {% block content %}
+{% include 'pages/includes/pages_menu.html' %}
 <main role="main">
-  <div class="container">
-    <div class="row mt-3">
-      <div class="col-md-9 mx-auto mb-5">
-        <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
-          <div class="row">
-            <!-- Avatar -->
-            <div class="col-md-2">
-              {% if profile.avatar %}
-                <img src="{{profile.avatar.url}}" class="img-fluid">
-              {% else %}
-                <img src="{% static 'registration/img/no-avatar.jpg' %}" class="img-fluid">
-              {% endif %}
-              {% if request.user != profile.user %}
-                <a href="{% url 'messenger:start' profile.user.username %}" class="btn btn-primary btn-sm btn-block mt-3">
-                  Enviar Mensaje
-                </a>
-              {% endif %}
-            </div>
-            <!-- Campos -->
-            <div class="col-md-10">
-              <h3>{{profile.user}}</h3>
-              {% if profile.bio %}<p>{{profile.bio|safe}}</p>{% endif %}
-              {% if profile.link %}<p><a href="{{profile.link}}" target="_blank">{{profile.link}}</a></p>{% endif %}
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+ 
+
+
 
   <div class="container mb-4">
     {% for page in page_list|dictsort:"id" reversed %}
@@ -67,5 +42,8 @@
         </div>
       </div>
     {% endfor %}
+  </div>
+
+  
 </main>
 {% endblock %}
