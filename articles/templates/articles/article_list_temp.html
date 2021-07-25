@@ -1,0 +1,123 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Páginas{% endblock %}
+{% block content %}
+{% include 'articles/includes/articles_menu.html' %}
+<main role="main">
+  <table class="table mb-0">
+    <thead>
+      <tr>
+        <th>Cover</th>
+        <th>Title</th>
+        <th>Download</th>
+        <th>Download</th>
+        {% if request.user.is_staff %}
+          <th>Edit</th>
+        {% endif %}
+        
+      </tr>
+    </thead>
+    <tbody>
+      {% for article in article_list %}
+        <tr>
+          <td>
+            {% if article.cover %}
+              <img src="{{ article.cover.url }}" alt="{{ article.title }}" style="width:100px;">
+            {% else %}
+              <span class="text-muted">No cover</span>
+            {% endif %}
+          </td>
+          <td>
+            <p><a href="{% url 'articles:article' article.id article.title|slugify %}">{{ article.title }}</a>
+          </td>
+          <td>
+            <a href="{{ article.pdf.url }}" class="btn btn-primary btn-sm btn-block" target="_blank">
+              Download PDF
+            </a>
+            {% if request.user != article.created_by %}
+                <a href="{% url 'messenger:start' article.created_by.username %}" class="btn btn-primary btn-sm btn-block mt-3">
+                  Enviar Mensaje
+                </a>
+            {% endif %}
+          </td>
+          <td>
+            
+            <p class="profile-data">
+              <b>{{profile.user|truncatechars:"16"}}</b><br>
+              <a href="{% url 'profiles:detail' article.created_by %}">Ver perfil</a>
+            </p>
+          </td> 
+
+            {% if request.user.is_staff %}
+            <td>
+              <a href="{% url 'articles:update' article.id %}">Editar</a>
+              <a href="{% url 'articles:delete' article.id %}">Borrar</a>
+            </td> 
+            {% endif %}
+
+            
+          
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+
+  <div class="container mb-4">
+    {% for article in article_list|dictsort:"id" reversed %}
+      <div class="row mt-3">
+        <div class="col-md-9 mx-auto">
+          <h2 class="mb-4">{{article.title}}</h2>
+          <div>
+            <p>{{article.content|striptags|safe|truncatechars:"200"}}</p>
+            
+            <p><a href="{% url 'articles:article' article.id article.title|slugify %}">Leer más</a>
+              
+              {% if request.user.is_staff %}
+                | <a href="{% url 'articles:update' article.id %}">Editar</a>
+                | <a href="{% url 'articles:delete' article.id %}">Borrar</a>
+              {% endif %}
+             
+            </p>
+
+            <p>{{article.id}}</p>
+            <p>{{article.pdf}}</p>
+            <p>{{article.created_by}}</p>
+            
+
+            <p class="profile-data">
+              <b>{{profile.user|truncatechars:"16"}}</b><br>
+              <a href="{% url 'profiles:detail' article.created_by %}">Ver perfil</a>
+            </p>
+
+            {% if request.user != article.created_by %}
+                <a href="{% url 'messenger:start' article.created_by.username %}" class="btn btn-primary btn-sm btn-block mt-3">
+                  Enviar Mensaje
+                </a>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+    <p>{{article_list}}</p>
+  </div>
+
+  <div class="container mb-4" id="bMosaicBox">
+    {% for article in article_list|dictsort:"id" reversed %}
+    <div id="{{article.id}}"> 
+      {{article.title}}
+      <a href="{% url 'articles:article' article.id article.title|slugify %}"  title={{article.title}}>
+        <div >
+          <img src="{{ article.cover.url }}">
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+
+  
+</main>
+{% endblock %}
