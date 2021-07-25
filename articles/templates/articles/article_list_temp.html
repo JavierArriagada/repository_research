@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Páginas{% endblock %}
 {% block content %}
-{% include 'pages/includes/pages_menu.html' %}
+{% include 'articles/includes/articles_menu.html' %}
 <main role="main">
   <table class="table mb-0">
     <thead>
@@ -18,24 +18,24 @@
       </tr>
     </thead>
     <tbody>
-      {% for page in page_list %}
+      {% for article in article_list %}
         <tr>
           <td>
-            {% if page.cover %}
-              <img src="{{ page.cover.url }}" alt="{{ page.title }}" style="width:100px;">
+            {% if article.cover %}
+              <img src="{{ article.cover.url }}" alt="{{ article.title }}" style="width:100px;">
             {% else %}
               <span class="text-muted">No cover</span>
             {% endif %}
           </td>
           <td>
-            <p><a href="{% url 'pages:page' page.id page.title|slugify %}">{{ page.title }}</a>
+            <p><a href="{% url 'articles:article' article.id article.title|slugify %}">{{ article.title }}</a>
           </td>
           <td>
-            <a href="{{ page.pdf.url }}" class="btn btn-primary btn-sm btn-block" target="_blank">
+            <a href="{{ article.pdf.url }}" class="btn btn-primary btn-sm btn-block" target="_blank">
               Download PDF
             </a>
-            {% if request.user != page.created_by %}
-                <a href="{% url 'messenger:start' page.created_by.username %}" class="btn btn-primary btn-sm btn-block mt-3">
+            {% if request.user != article.created_by %}
+                <a href="{% url 'messenger:start' article.created_by.username %}" class="btn btn-primary btn-sm btn-block mt-3">
                   Enviar Mensaje
                 </a>
             {% endif %}
@@ -44,14 +44,14 @@
             
             <p class="profile-data">
               <b>{{profile.user|truncatechars:"16"}}</b><br>
-              <a href="{% url 'profiles:detail' page.created_by %}">Ver perfil</a>
+              <a href="{% url 'profiles:detail' article.created_by %}">Ver perfil</a>
             </p>
           </td> 
 
             {% if request.user.is_staff %}
             <td>
-              <a href="{% url 'pages:update' page.id %}">Editar</a>
-              <a href="{% url 'pages:delete' page.id %}">Borrar</a>
+              <a href="{% url 'articles:update' article.id %}">Editar</a>
+              <a href="{% url 'articles:delete' article.id %}">Borrar</a>
             </td> 
             {% endif %}
 
@@ -65,34 +65,34 @@
 
 
   <div class="container mb-4">
-    {% for page in page_list|dictsort:"id" reversed %}
+    {% for article in article_list|dictsort:"id" reversed %}
       <div class="row mt-3">
         <div class="col-md-9 mx-auto">
-          <h2 class="mb-4">{{page.title}}</h2>
+          <h2 class="mb-4">{{article.title}}</h2>
           <div>
-            <p>{{page.content|striptags|safe|truncatechars:"200"}}</p>
+            <p>{{article.content|striptags|safe|truncatechars:"200"}}</p>
             
-            <p><a href="{% url 'pages:page' page.id page.title|slugify %}">Leer más</a>
+            <p><a href="{% url 'articles:article' article.id article.title|slugify %}">Leer más</a>
               
               {% if request.user.is_staff %}
-                | <a href="{% url 'pages:update' page.id %}">Editar</a>
-                | <a href="{% url 'pages:delete' page.id %}">Borrar</a>
+                | <a href="{% url 'articles:update' article.id %}">Editar</a>
+                | <a href="{% url 'articles:delete' article.id %}">Borrar</a>
               {% endif %}
              
             </p>
 
-            <p>{{page.id}}</p>
-            <p>{{page.pdf}}</p>
-            <p>{{page.created_by}}</p>
+            <p>{{article.id}}</p>
+            <p>{{article.pdf}}</p>
+            <p>{{article.created_by}}</p>
             
 
             <p class="profile-data">
               <b>{{profile.user|truncatechars:"16"}}</b><br>
-              <a href="{% url 'profiles:detail' page.created_by %}">Ver perfil</a>
+              <a href="{% url 'profiles:detail' article.created_by %}">Ver perfil</a>
             </p>
 
-            {% if request.user != page.created_by %}
-                <a href="{% url 'messenger:start' page.created_by.username %}" class="btn btn-primary btn-sm btn-block mt-3">
+            {% if request.user != article.created_by %}
+                <a href="{% url 'messenger:start' article.created_by.username %}" class="btn btn-primary btn-sm btn-block mt-3">
                   Enviar Mensaje
                 </a>
             {% endif %}
@@ -102,16 +102,16 @@
       </div>
     {% endfor %}
 
-    <p>{{page_list}}</p>
+    <p>{{article_list}}</p>
   </div>
 
   <div class="container mb-4" id="bMosaicBox">
-    {% for page in page_list|dictsort:"id" reversed %}
-    <div id="{{page.id}}"> 
-      {{page.title}}
-      <a href="{% url 'pages:page' page.id page.title|slugify %}"  title={{page.title}}>
+    {% for article in article_list|dictsort:"id" reversed %}
+    <div id="{{article.id}}"> 
+      {{article.title}}
+      <a href="{% url 'articles:article' article.id article.title|slugify %}"  title={{article.title}}>
         <div >
-          <img src="{{ page.cover.url }}">
+          <img src="{{ article.cover.url }}">
         </div>
       </a>
     </div>

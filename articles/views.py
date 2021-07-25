@@ -47,9 +47,10 @@ class ArticleCreate(CreateView):
         if form_class.is_valid():          
             form_class.save()
 
-    
+    def get_success_url(self):
+        return reverse_lazy('articles:update', args=[self.object.id]) + '?ok'
 
-    success_url = reverse_lazy('articles:articles')
+    #success_url = reverse_lazy('articles:articles')
 
     
 @method_decorator(staff_member_required, name='dispatch')
