@@ -19,7 +19,8 @@
               Download PDF
             </a>
           </td>
-
+         
+          
           
 
         </div>
@@ -29,7 +30,12 @@
       <p class="profile-data">
         <b>{{profile.user|truncatechars:"16"}}</b><br>
         <a href="{% url 'profiles:detail' page.created_by %}">Ver perfil</a>
+
+        <img src="{{ page.created_by.profile.avatar.url }}" class="img-fluid">
+
+        <img src="{% static 'registration/img/no-avatar.jpg' %}" class="img-fluid">
       </p>
+      
 
       {% if request.user != page.created_by %}
           <a href="{% url 'messenger:start' page.created_by.username %}" class="btn btn-primary btn-sm btn-block mt-3">
@@ -40,7 +46,7 @@
   </div> 
 
   <div class="container mb-4">
-    {% for page in page_list|dictsort:"id" reversed %}
+    {% for page in julio_godoy_list|dictsort:"id" reversed %}
       <div class="row mt-3">
         <div class="col-md-9 mx-auto">
           <h2 class="mb-4">{{page.title}}</h2>
@@ -57,7 +63,7 @@
             </p>
 
             <p>{{page.id}}</p>
-            
+           
 
             <p class="profile-data">
               <a href="{% url 'profiles:detail' page.created_by %}">{{page.created_by}}</a>
